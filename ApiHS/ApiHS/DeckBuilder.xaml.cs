@@ -28,6 +28,7 @@ namespace ApiHS
         public DeckBuilder()
         {
             InitializeComponent();
+            //Navigation.RemovePage(this.Navigation.NavigationStack[this.Navigation.NavigationStack.Count - 2]);
             TraerToken();
         }
 

@@ -4,7 +4,7 @@
              x:Class="ApiHS.Inicio">
     <ContentPage.Content>
         <StackLayout>
-            <Picker x:Name="Selector" Title="Elegir región: " HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="200" />
+            <Picker x:Name="Selector" Title="Elegir región: " HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="200" SelectedIndexChanged="SelectedIndexChanged"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -20,11 +20,6 @@ namespace ApiHS
         public Inicio ()
 		{
 			InitializeComponent ();
-            //Inicializo el picker
-            Regiones = new ObservableCollection<string>();
-            Regiones.Add("Español - España");
-            Regiones.Add("Español - Latinoamérica");
-            Selector.ItemsSource = Regiones;
             //Chequeo si el usuario ya eligio su region previamente
             ChequeoRegion();
         }
@@ -38,18 +33,27 @@ namespace ApiHS
             }
             else
             {
-
-                if (Selector.SelectedIndex == 0)
-                {
-                    RegionSeleccionada = "es_ES";
-                }
-                else
-                {
-                    RegionSeleccionada = "es_MX";
-                }
-
-                Application.Current.Properties["region"] = RegionSeleccionada;
+                //Inicializo el picker
+                Regiones = new ObservableCollection<string>();
+                Regiones.Add("Español - España");
+                Regiones.Add("Español - Latinoamérica");
+                Selector.ItemsSource = Regiones;
             }
         }
-	}
+
+        public void SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Selector.SelectedIndex == 0)
+            {//Si la opcion elegida es la primera setea la region como España
+                RegionSeleccionada = "es_ES";
+            }
+            else
+            {//Si la opcion elegida es la segunda setea la region como Latinoamerica
+                RegionSeleccionada = "es_MX";
+            }
+
+            Application.Current.Properties["region"] = RegionSeleccionada;
+            ChequeoRegion();
+        }
+    }
 }
