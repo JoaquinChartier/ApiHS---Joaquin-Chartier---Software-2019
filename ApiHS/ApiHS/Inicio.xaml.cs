@@ -27,7 +27,6 @@ namespace ApiHS
             Selector.ItemsSource = Regiones;
             //Chequeo si el usuario ya eligio su region previamente
             ChequeoRegion();
-
         }
 
         public async void ChequeoRegion() {
