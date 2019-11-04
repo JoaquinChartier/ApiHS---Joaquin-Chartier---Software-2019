@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ApiHS"
+             x:Class="ApiHS.DeckBuilder"
+             Title="DeckBuilder">
+    <ContentPage.Content>
+        <Grid Padding="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="300" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <SearchBar x:Name="BarraBusqueda" Placeholder="Buscar carta" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+            
+            <Button Clicked="AlCliquear" Text="OK" Grid.Row="0" Grid.Column="3" Scale="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+            
+            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+
+                <ListView x:Name="ListaResultados" ItemSelected="ItemSeleccionado">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell TextColor="Black" Text="{Binding name}" Detail="{Binding manaCost}"/> 
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </StackLayout>
+            
+            <StackLayout BackgroundColor="Aqua" Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
+                <Button Text="F"/>
+                <Button Text="C" />
+            </StackLayout>
+            <Image x:Name="VisorCartas" BackgroundColor="Beige" Aspect="AspectFit" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  Source="https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e2d2e1d8efdbd790a0320204ad8137732af2ecebdc896e669bb371fca7691d19.png"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

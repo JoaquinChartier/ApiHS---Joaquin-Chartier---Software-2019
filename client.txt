@@ -1,0 +1,59 @@
+ID
+36e9d604cdd54ecd96a87ae552ba88b9
+
+SECRET
+l29aZRI3yIYJr12zQcLa2l1qMZlqxj4M
+
+
+
+curl -u {client_id}:{client_secret} -d grant_type=client_credentials https://us.battle.net/oauth/token
+
+using (var httpClient = new HttpClient())
+{
+    using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://us.battle.net/oauth/token"))
+    {
+        var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes("{36e9d604cdd54ecd96a87ae552ba88b9}:{l29aZRI3yIYJr12zQcLa2l1qMZlqxj4M}"));
+    request.Headers.TryAddWithoutValidation("Authorization", $"Basic {base64authorization}"); 
+
+        request.Content = new StringContent("grant_type=client_credentials", Encoding.UTF8, "application/x-www-form-urlencoded");
+
+    var response = await httpClient.SendAsync(request);
+}
+
+
+var client = new RestClient("http://example.com");
+// client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+var request = new RestRequest("resource/{id}", Method.POST);
+request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
+request.AddUrlSegment("id", "123"); // replaces matching token in request.Resource
+
+// easily add HTTP Headers
+request.AddHeader("header", "value");
+
+// add files to upload (works with compatible verbs)
+request.AddFile(path);
+
+// execute the request
+IRestResponse response = client.Execute(request);
+var content = response.Content; // raw content as string
+
+// or automatically deserialize result
+// return content type is sniffed but can be explicitly set via RestClient.AddHandler();
+RestResponse<Person> response2 = client.Execute<Person>(request);
+var name = response2.Data.Name;
+
+// easy async support
+client.ExecuteAsync(request, response => {
+    Console.WriteLine(response.Content);
+});
+
+// async with deserialization
+var asyncHandle = client.ExecuteAsync<Person>(request, response => {
+    Console.WriteLine(response.Data.Name);
+});
+
+// abort the request on demand
+asyncHandle.Abort();
+
+algo
