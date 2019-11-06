@@ -34,9 +34,9 @@
                 
             </StackLayout>
             
-            <StackLayout BackgroundColor="Aqua" Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
-                <Button Text="F"/>
-                <Button Text="C" />
+            <StackLayout Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
+                <ImageButton Source="filter.png" BackgroundColor="Gray" Aspect="AspectFit"/>
+                <ImageButton Source="build.png" BackgroundColor="Gray" Aspect="AspectFit"/>
             </StackLayout>
             <Image x:Name="VisorCartas" BackgroundColor="Beige" Aspect="AspectFit" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  Source="https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e2d2e1d8efdbd790a0320204ad8137732af2ecebdc896e669bb371fca7691d19.png"/>
 
