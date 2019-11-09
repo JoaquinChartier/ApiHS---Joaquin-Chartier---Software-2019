@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+//using HearthDb.Deckstrings;
 
 namespace ApiHS
 {
@@ -60,5 +61,7 @@ namespace ApiHS
             IndexSeleccionado = e.SelectedItemIndex; //Guardo en variable el index del elemento seleccionado
             VisorCartas.Source = ResultList[IndexSeleccionado].image; //Asigno al visor la imagen correspondiente al index
         }
+
+
     }
 }

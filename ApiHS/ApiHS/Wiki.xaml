@@ -3,7 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ApiHS.Wiki"
              Title="Wiki">
-    <ContentPage.Content>
-        <Label Text="LABEL"/>
-    </ContentPage.Content>
+    <StackLayout>
+        <!--<Entry x:Name="NombreMazo" Placeholder="Nombre" />
+        <Entry x:Name="Clase" Placeholder="Clase" />
+        <Entry x:Name="ManaPromedio" Placeholder="Mana" />
+        <Button x:Name="Go" Clicked="Go_Clicked" Text="Grabar" />
+        <Label Text="SEPARADOR"/>
+        <Label x:Name="lblClase" Text="" />
+        <Label x:Name="lblNombre" Text="" />
+        <Label x:Name="lblMana" Text="" />
+        <Button x:Name="Mostrar" Clicked="Mostrar_Clicked" Text="Recuperar" />
+        <Label x:Name="Prueba" Text="" TextColor="Green"/>-->
+    </StackLayout>
 </ContentPage>

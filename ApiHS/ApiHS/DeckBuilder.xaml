@@ -27,7 +27,7 @@
                 <ListView x:Name="ListaResultados" ItemSelected="ItemSeleccionado">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell TextColor="Black" Text="{Binding name}" Detail="{Binding manaCost}"/> 
+                            <TextCell TextColor="Black" Text="{Binding name}" Detail="{Binding id}"/> 
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

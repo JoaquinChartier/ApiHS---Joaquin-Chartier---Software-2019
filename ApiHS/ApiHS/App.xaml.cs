@@ -11,7 +11,7 @@ namespace ApiHS
         {
             InitializeComponent();
 
-            //MainPage = new MainPage();
+            //MainPage = new Wiki();
             MainPage = new NavigationPage(new Inicio());
         }
 

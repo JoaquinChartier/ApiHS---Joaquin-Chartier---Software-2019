@@ -26,7 +26,7 @@ namespace ApiHS
             public string cropImage { get; set; }
             public List<int> childIds { get; set; }
             public List<int> keywordIds { get; set; }
-        }
+    }
 
         public class Root
         {
