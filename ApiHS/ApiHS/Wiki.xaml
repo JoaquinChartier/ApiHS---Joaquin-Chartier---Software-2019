@@ -14,5 +14,8 @@
         <Label x:Name="lblMana" Text="" />
         <Button x:Name="Mostrar" Clicked="Mostrar_Clicked" Text="Recuperar" />
         <Label x:Name="Prueba" Text="" TextColor="Green"/>-->
+        
+        <Entry Placeholder="" x:Name="Entrada" Text=""/>
+        <Button Text="tpcar" Clicked="Button_Clicked"/>
     </StackLayout>
 </ContentPage>

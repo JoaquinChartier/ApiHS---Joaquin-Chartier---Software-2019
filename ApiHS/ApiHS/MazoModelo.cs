@@ -8,7 +8,7 @@ namespace ApiHS
     {
         public string NombreMazo { get; set; }
         public string Clase { get; set; }
-        public List<Card> Cartas { get; set; }
+        public Dictionary<int,int> Cartas { get; set; }
         public string Codigo { get; set; }
         public bool TipoMazo { get; set; }
 

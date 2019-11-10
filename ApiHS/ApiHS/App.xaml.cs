@@ -11,8 +11,8 @@ namespace ApiHS
         {
             InitializeComponent();
 
-            //MainPage = new Wiki();
-            MainPage = new NavigationPage(new Inicio());
+            MainPage = new Wiki();
+            //MainPage = new NavigationPage(new Inicio());
         }
 
         protected override void OnStart()
