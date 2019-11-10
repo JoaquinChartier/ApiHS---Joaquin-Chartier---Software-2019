@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,26 +18,16 @@ namespace ApiHS
 
         public Inicio ()
 		{
-			InitializeComponent ();
-            //Chequeo si el usuario ya eligio su region previamente
-            ChequeoRegion();
+			InitializeComponent();
+            InicializacionPicker();
         }
 
-        public async void ChequeoRegion() {
-            if (Application.Current.Properties.ContainsKey("region"))
-            {
-                //Si contiene la key, pasa a la sig pagina, y elimina el boton "atras"
-                await Navigation.PushAsync(new MainPage());
-                NavigationPage.SetHasBackButton(this, false);
-            }
-            else
-            {
-                //Inicializo el picker
-                Regiones = new ObservableCollection<string>();
-                Regiones.Add("Español - España");
-                Regiones.Add("Español - Latinoamérica");
-                Selector.ItemsSource = Regiones;
-            }
+        public void InicializacionPicker() {
+            //Inicializo el picker
+            Regiones = new ObservableCollection<string>();
+            Regiones.Add("Español - España");
+            Regiones.Add("Español - Latinoamérica");
+            Selector.ItemsSource = Regiones;
         }
 
         public void SelectedIndexChanged(object sender, EventArgs e)
@@ -53,7 +42,6 @@ namespace ApiHS
             }
 
             Application.Current.Properties["region"] = RegionSeleccionada;
-            ChequeoRegion();
         }
     }
 }
