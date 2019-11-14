@@ -9,7 +9,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="300" />
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -27,7 +27,7 @@
                 <ListView x:Name="ListaResultados" ItemSelected="ItemSeleccionado">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell TextColor="Black" Text="{Binding name}" Detail="{Binding id}"/> 
+                            <TextCell TextColor="Black" Text="{Binding name}" Detail="{Binding rarityId}"/> 
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -35,10 +35,15 @@
             </StackLayout>
             
             <StackLayout Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
-                <ImageButton Source="filter.png" BackgroundColor="Gray" Aspect="AspectFit"/>
-                <ImageButton Source="build.png" BackgroundColor="Gray" Aspect="AspectFit"/>
+                <ImageButton Source="filter.png" BackgroundColor="Default" Aspect="AspectFit"/>
+                <ImageButton Source="build.png" BackgroundColor="Default" Aspect="AspectFit"/>
+                <ImageButton Source="add.png" BackgroundColor="Default" Aspect="AspectFit" x:Name="Agregar" Clicked="AgregarCliqueado"/>
+                <Label x:Name="LabelContador" Text="0/0" HorizontalOptions="CenterAndExpand"/>
+                <!--<ImageButton Source="add.png" BackgroundColor="Default" Aspect="AspectFit" x:Name="Exportar"/>-->
+                <Label x:Name="TotalCartasMazo" Text="0/30" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
-            <Image x:Name="VisorCartas" BackgroundColor="Beige" Aspect="AspectFit" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  Source="https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e2d2e1d8efdbd790a0320204ad8137732af2ecebdc896e669bb371fca7691d19.png"/>
+
+            <Image x:Name="VisorCartas" Aspect="AspectFit" BackgroundColor="Transparent" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"/>
 
         </Grid>
     </ContentPage.Content>

@@ -16,9 +16,6 @@ namespace ApiHS
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Wiki : ContentPage
 	{
-        //public Dictionary<int,int> CardDbfIds;
-
-
         public Wiki ()
 		{
 			InitializeComponent();
