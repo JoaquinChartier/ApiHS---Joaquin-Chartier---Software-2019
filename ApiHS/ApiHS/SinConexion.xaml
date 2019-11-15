@@ -1,12 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ApiHS.SinConexion">
+             x:Class="ApiHS.SinConexion"
+             BackgroundColor="#48496C"
+             >
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="No hay conexión a Internet, por favor intente mas tarde."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="wifi_off.png" 
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"/>
+            <Label Text="No hay conexión a Internet, por favor intente mas tarde"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" 
+                   FontSize="Title"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"/>
             <Button Text="OK" Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

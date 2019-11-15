@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ApiHS"
              x:Class="ApiHS.DeckBuilder"
-             Title="DeckBuilder">
+             Title="Creador de mazos">
+    
     <ContentPage.Content>
         <Grid Padding="0" Margin="0">
             <Grid.RowDefinitions>
@@ -18,32 +19,84 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <SearchBar x:Name="BarraBusqueda" Placeholder="Buscar carta" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <SearchBar x:Name="BarraBusqueda" 
+                       Placeholder="Buscar carta" 
+                       Grid.Row="0" 
+                       Grid.Column="0" 
+                       Grid.ColumnSpan="3"/>
             
-            <Button Clicked="AlCliquear" Text="OK" Grid.Row="0" Grid.Column="3" Scale="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Button Clicked="AlCliquear" 
+                    Text="OK" 
+                    Grid.Row="0" 
+                    Grid.Column="3" 
+                    Scale="1" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"/>
             
-            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <StackLayout Grid.Row="1" 
+                         Grid.Column="0" 
+                         Grid.ColumnSpan="3" 
+                         VerticalOptions="FillAndExpand" 
+                         HorizontalOptions="FillAndExpand" >
 
                 <ListView x:Name="ListaResultados" ItemSelected="ItemSeleccionado">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell TextColor="Black" Text="{Binding name}" Detail="{Binding rarityId}"/> 
+                            <TextCell TextColor="Black" 
+                                      Text="{Binding name}" 
+                                      Detail="{Binding rarityId}"/> 
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
                 
             </StackLayout>
             
-            <StackLayout Grid.Row="1" Grid.Column="3" Grid.RowSpan="3" >
-                <ImageButton Source="filter.png" BackgroundColor="Default" Aspect="AspectFit"/>
-                <ImageButton Source="build.png" BackgroundColor="Default" Aspect="AspectFit"/>
-                <ImageButton Source="add.png" BackgroundColor="Default" Aspect="AspectFit" x:Name="Agregar" Clicked="AgregarCliqueado"/>
-                <Label x:Name="LabelContador" Text="0/0" HorizontalOptions="CenterAndExpand"/>
-                <!--<ImageButton Source="add.png" BackgroundColor="Default" Aspect="AspectFit" x:Name="Exportar"/>-->
-                <Label x:Name="TotalCartasMazo" Text="0/30" HorizontalOptions="CenterAndExpand"/>
+            <StackLayout Grid.Row="1" 
+                         Grid.Column="3" 
+                         Grid.RowSpan="3" >
+                
+                <ImageButton Source="filter.png" 
+                             BackgroundColor="Default" 
+                             Aspect="AspectFit"/>
+                
+                <ImageButton Source="build.png" 
+                             BackgroundColor="Default" 
+                             Aspect="AspectFit"/>
+                
+                <ImageButton Source="add.png" 
+                             BackgroundColor="Default" 
+                             Aspect="AspectFit" 
+                             x:Name="Agregar" 
+                             Clicked="AgregarCliqueado"/>
+                
+                <Label x:Name="LabelContador" 
+                       Text="-" 
+                       HorizontalOptions="CenterAndExpand"
+                       FontAttributes="Bold"/>
+                
+                <Label x:Name="TotalCartasMazo" 
+                       Text="0/30" 
+                       HorizontalOptions="CenterAndExpand"
+                       FontAttributes="Bold"/>
+
+                <ImageButton 
+                             x:Name="Borrar"
+                             Source="delete.png" 
+                             BackgroundColor="Default" 
+                             Aspect="AspectFit" 
+                             IsVisible="False"
+                             Clicked="BorrarCliqueado"/>
+
             </StackLayout>
 
-            <Image x:Name="VisorCartas" Aspect="AspectFit" BackgroundColor="Transparent" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand"/>
+            <Image x:Name="VisorCartas" 
+                   Aspect="AspectFit" 
+                   BackgroundColor="Transparent" 
+                   Grid.Row="2" 
+                   Grid.RowSpan="2" 
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="2" 
+                   VerticalOptions="FillAndExpand"/>
 
         </Grid>
     </ContentPage.Content>
