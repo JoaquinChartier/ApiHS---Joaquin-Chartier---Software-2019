@@ -25,7 +25,7 @@
                        Grid.Column="0" 
                        Grid.ColumnSpan="3"/>
             
-            <Button Clicked="AlCliquear" 
+            <Button Clicked="AlCliquearOK" 
                     Text="OK" 
                     Grid.Row="0" 
                     Grid.Column="3" 
@@ -44,7 +44,7 @@
                         <DataTemplate>
                             <TextCell TextColor="Black" 
                                       Text="{Binding name}" 
-                                      Detail="{Binding rarityId}"/> 
+                                      Detail="{Binding classId}"/> 
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -86,6 +86,14 @@
                              Aspect="AspectFit" 
                              IsVisible="False"
                              Clicked="BorrarCliqueado"/>
+
+                <ImageButton 
+                             x:Name="Exportar"
+                             Source="launch.png" 
+                             BackgroundColor="Default" 
+                             Aspect="AspectFit" 
+                             IsVisible="True"
+                             Clicked="ExportarCliqueado"/>
 
             </StackLayout>
 

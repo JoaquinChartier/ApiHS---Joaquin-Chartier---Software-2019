@@ -52,7 +52,10 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.2.0.223</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
@@ -116,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\launch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\copy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

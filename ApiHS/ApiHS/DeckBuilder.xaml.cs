@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using HearthDb.Deckstrings;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Contracts;
+using System.IO;
 
 namespace ApiHS
 {
@@ -20,6 +22,7 @@ namespace ApiHS
     {
         public string Buscar;
         public string Region = Application.Current.Properties["region"] as string;
+        public string Coleccionable = "1";
         public string UrlJSON = "";
         private readonly HttpClient cliente = new HttpClient();
         public readonly string DevUser = "36e9d604cdd54ecd96a87ae552ba88b9";
@@ -30,13 +33,12 @@ namespace ApiHS
         public MazoModelo MazoPorAgregar = new MazoModelo();
         public int CantidadCartasMazo;
 
-
-
         public DeckBuilder()
         {
             InitializeComponent();
             TraerToken();
             MazoPorAgregar.Cartas = new Dictionary<int, int>(); //Inicializo el diccionario
+
         }
 
         private void TraerToken()
@@ -49,10 +51,10 @@ namespace ApiHS
             Token = response.Data.access_token; //asigno el token a la variable token
         }
 
-        public async void AlCliquear(object sender, EventArgs e)
+        public async void AlCliquearOK(object sender, EventArgs e)
         {
             Buscar = BarraBusqueda.Text;
-            UrlJSON = "https://us.api.blizzard.com/hearthstone/cards?locale=" + Region + "&textFilter=" + Buscar + "&access_token=" + Token;
+            UrlJSON = "https://us.api.blizzard.com/hearthstone/cards?locale=" + Region + "&collectible="+ Coleccionable + "&textFilter=" + Buscar + "&access_token=" + Token;
             string contenido = await cliente.GetStringAsync(UrlJSON); //le paso la url del JSON
             Root resultado = JsonConvert.DeserializeObject<Root>(contenido); //deserializo el JSON en un objeto del tipo "Root"
             ResultList = new ObservableCollection<Card>(resultado.cards); //guardo los resultados que necesito en una coleccion
@@ -64,18 +66,18 @@ namespace ApiHS
             IndexSeleccionado = e.SelectedItemIndex; //Guardo en variable el index del elemento seleccionado
             VisorCartas.Source = ResultList[IndexSeleccionado].image; //Asigno al visor la imagen correspondiente al index
 
-            var esLegendaria = ResultList[IndexSeleccionado].rarityId == 5;
-            var fueAgregada = MazoPorAgregar.Cartas.ContainsKey(ResultList[IndexSeleccionado].id);
+            var esLegendaria = ResultList[IndexSeleccionado].rarityId == 5; //Si es legendaria
+            var fueAgregada = MazoPorAgregar.Cartas.ContainsKey(ResultList[IndexSeleccionado].id); //Si ya fue agregada
 
             if (fueAgregada)//Chequea si la carta ya fue agregada
             {
-                Borrar.IsVisible = true;
-                SetterLabelContador();
+                Borrar.IsVisible = true; //Muestra el botón borrar
+                SetterLabelContador(); 
             }
             else
             {   
                 Borrar.IsVisible = false;
-                if (CantidadCartasMazo < 30) {Agregar.SetValue(IsEnabledProperty, true);}//Si no fue agregada, el botón se enciende
+                if (CantidadCartasMazo < 30) {Agregar.SetValue(IsEnabledProperty, true);}//Si la cantidad de cartas es menor a 30, se puede seguir agregando
                 SetterLabelContador();
             }
         }
@@ -89,7 +91,7 @@ namespace ApiHS
             {
                 MazoPorAgregar.Cartas[ResultList[IndexSeleccionado].id] = 2;//Si ya existe agrega una mas
                 SetterLabelContador();
-                Agregar.SetValue(IsEnabledProperty, false);
+                Agregar.SetValue(IsEnabledProperty, false); //Deshabilita el botón agregar
             }
             else
             { //si es una legendaria...
@@ -115,17 +117,25 @@ namespace ApiHS
         }
 
         private void SetterCantidadCartasAgregadas()
-        {
+        {//Este metodo controla que la cantidad de cartas del mazo no pase de 30
             CantidadCartasMazo = MazoPorAgregar.Cartas.Values.Sum(); //Suma todos los values presentes en el diccionario
             TotalCartasMazo.Text = CantidadCartasMazo+"/30"; //Asigna el valor al label
-            if (CantidadCartasMazo==30) { Agregar.SetValue(IsEnabledProperty, false); } //Si la cantidad llegó a 30, desactiva el botón
+            if (CantidadCartasMazo == 30)
+            {
+                Agregar.SetValue(IsEnabledProperty, false);//Si la cantidad llegó a 30, desactiva el botón
+                TotalCartasMazo.TextColor = Color.Green; //Y muestra el label en Green
+                Exportar.SetValue(IsVisibleProperty, true);
+            }
+            else { TotalCartasMazo.TextColor = Color.Black;
+                   Exportar.SetValue(IsVisibleProperty, false);
+            }
         }
 
         private void BorrarCliqueado(object sender, EventArgs e)
         {
             var esLegendaria = ResultList[IndexSeleccionado].rarityId == 5;
             if (esLegendaria)
-            {
+            { //Si al borrar es una legendaria, elimina la key del diccionario
                 MazoPorAgregar.Cartas.Remove(ResultList[IndexSeleccionado].id);
                 Borrar.IsVisible = false;
                 SetterCantidadCartasAgregadas();
@@ -133,7 +143,7 @@ namespace ApiHS
                 Agregar.SetValue(IsEnabledProperty, true);
             }
             else
-            {
+            {//Si habia 2 copias decrementa en 1 el valor
                 if (MazoPorAgregar.Cartas[ResultList[IndexSeleccionado].id] == 2)
                 {
                     MazoPorAgregar.Cartas[ResultList[IndexSeleccionado].id] = 1;
@@ -141,7 +151,7 @@ namespace ApiHS
                     SetterLabelContador();
                 }
                 else
-                {
+                { //Si habia una sola copia elimina la key
                     MazoPorAgregar.Cartas.Remove(ResultList[IndexSeleccionado].id);
                     Borrar.IsVisible = false;
                     SetterCantidadCartasAgregadas();
@@ -152,7 +162,7 @@ namespace ApiHS
         }
 
         private void SetterLabelContador()
-        {
+        {//Este metodo controla que las cartas agregadas por mazo no pasen de: 2 en caso de comunes, 1 en caso de legend.
             var esLegendaria = ResultList[IndexSeleccionado].rarityId == 5;
             var fueAgregada = MazoPorAgregar.Cartas.ContainsKey(ResultList[IndexSeleccionado].id);
 
@@ -170,6 +180,15 @@ namespace ApiHS
                 if (esLegendaria) { LabelContador.Text = "0/1"; }
                 else { LabelContador.Text = "0/2"; }
             }
+        }
+
+        private void ExportarCliqueado(object sender, EventArgs e)
+        {
+            //Guarda en un txt el diccionario en Cuestion
+            string mazoAGuardar = JsonConvert.SerializeObject(MazoPorAgregar);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "saveDataHS.txt"), mazoAGuardar);
+            //Llama a la nueva pantalla de exportar
+            Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopUpExportar());
         }
     }
 }
