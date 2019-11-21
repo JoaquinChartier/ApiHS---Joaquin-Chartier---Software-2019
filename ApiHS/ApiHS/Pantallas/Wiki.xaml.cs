@@ -42,23 +42,23 @@ namespace ApiHS
         //    Entrada.Text = deckstring;
         //}
 
-        private void Go_Clicked(object sender, EventArgs e)
-        {
-            MazoModelo mazoModelo = new MazoModelo();
-            mazoModelo.Clase = Clase.Text;
-            mazoModelo.NombreMazo = NombreMazo.Text;
-            //mazoModelo.ManaPromedio = ManaPromedio.Text;
+        //private void Go_Clicked(object sender, EventArgs e)
+        //{
+        //    MazoModelo mazoModelo = new MazoModelo();
+        //    mazoModelo.Clase = Clase.Text;
+        //    mazoModelo.NombreMazo = NombreMazo.Text;
+        //    //mazoModelo.ManaPromedio = ManaPromedio.Text;
 
-            string textoAGuardar = JsonConvert.SerializeObject(mazoModelo);
-            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "savedata222.txt"), textoAGuardar);
-        }
+        //    string textoAGuardar = JsonConvert.SerializeObject(mazoModelo);
+        //    File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "savedata222.txt"), textoAGuardar);
+        //}
 
-        private void Mostrar_Clicked(object sender, EventArgs e)
-        {
-            string textoLeido = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "savedata222.txt"));
+        //private void Mostrar_Clicked(object sender, EventArgs e)
+        //{
+        //    string textoLeido = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "savedata222.txt"));
 
-            MazoModelo mazoDeserealizado = JsonConvert.DeserializeObject<MazoModelo>(textoLeido);
-            Prueba.Text = mazoDeserealizado.NombreMazo;
-        }
+        //    MazoModelo mazoDeserealizado = JsonConvert.DeserializeObject<MazoModelo>(textoLeido);
+        //    Prueba.Text = mazoDeserealizado.NombreMazo;
+        //}
     }
 }

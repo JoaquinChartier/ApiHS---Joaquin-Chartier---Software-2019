@@ -33,7 +33,7 @@ namespace ApiHS
 
             var deck = new Deck //Guarda en una variable, un nuevo objeto del tipo DECK
             {
-                HeroDbfId = 7, //Id del Héroe
+                HeroDbfId = (int)HeroesEnum.Guldan, //Id del Héroe
                 CardDbfIds = MazoPorCrear.Cartas, //Diccionario con las cartas
                 Format = FormatType.FT_WILD, //Formato del mazo: FT_WILD o FT_STANDARD
                 Name = "Mi Mazo personalizado", //Nombre del mazo, opcional

@@ -10,7 +10,8 @@
                  x:Name="Stack"
                  Margin="50"
                  Padding="50"
-                 BackgroundColor="White">
+                 BackgroundColor="White"
+                 >
       
             <Label Text="Cargando"
                    VerticalOptions="CenterAndExpand" 

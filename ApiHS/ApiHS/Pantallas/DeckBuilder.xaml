@@ -23,7 +23,9 @@
                        Placeholder="Buscar carta" 
                        Grid.Row="0" 
                        Grid.Column="0" 
-                       Grid.ColumnSpan="3"/>
+                       Grid.ColumnSpan="3"
+                       
+                       />
             
             <Button Clicked="AlCliquearOK" 
                     Text="OK" 
@@ -57,17 +59,22 @@
                 
                 <ImageButton Source="filter.png" 
                              BackgroundColor="Default" 
-                             Aspect="AspectFit"/>
+                             Aspect="AspectFit"
+                             Padding="7"/>
                 
-                <ImageButton Source="build.png" 
+                <ImageButton x:Name="Configuracion"
+                             Source="build.png" 
                              BackgroundColor="Default" 
-                             Aspect="AspectFit"/>
+                             Aspect="AspectFit"
+                             Clicked="ConfiguracionCliqueado"
+                             Padding="7"/>
                 
                 <ImageButton Source="add.png" 
                              BackgroundColor="Default" 
                              Aspect="AspectFit" 
                              x:Name="Agregar" 
-                             Clicked="AgregarCliqueado"/>
+                             Clicked="AgregarCliqueado"
+                             Padding="7"/>
                 
                 <Label x:Name="LabelContador" 
                        Text="-" 
@@ -85,7 +92,8 @@
                              BackgroundColor="Default" 
                              Aspect="AspectFit" 
                              IsVisible="False"
-                             Clicked="BorrarCliqueado"/>
+                             Clicked="BorrarCliqueado"
+                             Padding="7"/>
 
                 <ImageButton 
                              x:Name="Exportar"
@@ -93,7 +101,8 @@
                              BackgroundColor="Default" 
                              Aspect="AspectFit" 
                              IsVisible="True"
-                             Clicked="ExportarCliqueado"/>
+                             Clicked="ExportarCliqueado"
+                             Padding="7"/>
 
             </StackLayout>
 

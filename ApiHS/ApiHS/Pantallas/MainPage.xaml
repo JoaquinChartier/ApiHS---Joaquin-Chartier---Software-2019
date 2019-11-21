@@ -6,7 +6,7 @@
             >
     
     <locale:DeckBuilder/>
-    <locale:Wiki/>
+    <!--<locale:Wiki/>-->
     <locale:Noticias/>
 
 

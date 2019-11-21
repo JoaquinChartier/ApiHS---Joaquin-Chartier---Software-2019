@@ -4,15 +4,10 @@ using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using HearthDb.Deckstrings;
 using Xamarin.Forms.Xaml;
-using Rg.Plugins.Popup.Contracts;
 using System.IO;
 
 namespace ApiHS
@@ -37,8 +32,7 @@ namespace ApiHS
         {
             InitializeComponent();
             TraerToken();
-            MazoPorAgregar.Cartas = new Dictionary<int, int>(); //Inicializo el diccionario
-
+            IniciacionDePantalla();
         }
 
         private void TraerToken()
@@ -189,6 +183,20 @@ namespace ApiHS
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "saveDataHS.txt"), mazoAGuardar);
             //Llama a la nueva pantalla de exportar
             Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopUpExportar());
+        }
+
+        private void ConfiguracionCliqueado(object sender, EventArgs e)//
+        {
+            Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopUpConfiguracion());
+        }
+
+        private void IniciacionDePantalla()//
+        {
+            MazoPorAgregar.Cartas = new Dictionary<int, int>(); //Inicializo el diccionario
+            MazoPorAgregar.NombreMazo = "";
+            MazoPorAgregar.TipoMazo = HearthDb.Enums.FormatType.FT_STANDARD;
+            MazoPorAgregar.Clase = HeroesEnum.Garrosh;
+            Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopUpConfiguracion());//Llamo al PopUp
         }
     }
 }

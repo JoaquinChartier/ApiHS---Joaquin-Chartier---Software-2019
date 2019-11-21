@@ -4,7 +4,7 @@
              x:Class="ApiHS.Wiki"
              Title="Wiki">
     <StackLayout>
-        <Entry x:Name="NombreMazo" Placeholder="Nombre" />
+        <!--<Entry x:Name="NombreMazo" Placeholder="Nombre" />
         <Entry x:Name="Clase" Placeholder="Clase" />
         <Entry x:Name="ManaPromedio" Placeholder="Mana" />
         <Button x:Name="Go" Clicked="Go_Clicked" Text="Grabar" />
@@ -13,7 +13,7 @@
         <Label x:Name="lblNombre" Text="" />
         <Label x:Name="lblMana" Text="" />
         <Button x:Name="Mostrar" Clicked="Mostrar_Clicked" Text="Recuperar" />
-        <Label x:Name="Prueba" Text="" TextColor="Green"/>
+        <Label x:Name="Prueba" Text="" TextColor="Green"/>-->
         
         <!--<Entry Placeholder="" x:Name="Entrada" Text=""/>
         <Button Text="tpcar" Clicked="Button_Clicked"/>-->

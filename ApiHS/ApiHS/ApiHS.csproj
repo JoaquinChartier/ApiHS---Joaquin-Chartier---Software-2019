@@ -22,31 +22,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="DeckBuilder.xaml.cs">
+    <Compile Update="Pantallas\DeckBuilder.xaml.cs">
       <DependentUpon>DeckBuilder.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Noticias.xaml.cs">
+    <Compile Update="Pantallas\Noticias.xaml.cs">
       <DependentUpon>Noticias.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Inicio.xaml">
+    <EmbeddedResource Update="Pantallas\Inicio.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="MainPage.xaml">
+    <EmbeddedResource Update="Pantallas\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Noticias.xaml">
+    <EmbeddedResource Update="Pantallas\Noticias.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="PopUpExportar.xaml">
+    <EmbeddedResource Update="PopUps\PopUpConfiguracion.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SinConexion.xaml">
+    <EmbeddedResource Update="PopUps\PopUpExportar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Wiki.xaml">
+    <EmbeddedResource Update="Pantallas\SinConexion.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pantallas\Wiki.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
