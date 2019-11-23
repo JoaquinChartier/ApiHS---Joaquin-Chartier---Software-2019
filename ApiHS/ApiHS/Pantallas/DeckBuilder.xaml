@@ -2,8 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ApiHS"
+             xmlns:converters="clr-namespace:ApiHS.Converters"
              x:Class="ApiHS.DeckBuilder"
              Title="Creador de mazos">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RarezaConverter x:Key="RarezaConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         <Grid Padding="0" Margin="0">
@@ -24,8 +31,7 @@
                        Grid.Row="0" 
                        Grid.Column="0" 
                        Grid.ColumnSpan="3"
-                       
-                       />
+                       SearchButtonPressed="AlCliquearOK"/>
             
             <Button Clicked="AlCliquearOK" 
                     Text="OK" 
@@ -33,7 +39,8 @@
                     Grid.Column="3" 
                     Scale="1" 
                     VerticalOptions="Center" 
-                    HorizontalOptions="Center"/>
+                    HorizontalOptions="Center"
+                    />
             
             <StackLayout Grid.Row="1" 
                          Grid.Column="0" 
@@ -46,7 +53,9 @@
                         <DataTemplate>
                             <TextCell TextColor="Black" 
                                       Text="{Binding name}" 
-                                      Detail="{Binding classId}"/> 
+                                      Detail="{Binding rarityId}"
+                                      DetailColor="{Binding rarityId,Converter={StaticResource RarezaConverter}}"
+                                      />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -57,7 +66,7 @@
                          Grid.Column="3" 
                          Grid.RowSpan="3" >
                 
-                <ImageButton Source="filter.png" 
+                <ImageButton Source="tune.png" 
                              BackgroundColor="Default" 
                              Aspect="AspectFit"
                              Padding="7"/>

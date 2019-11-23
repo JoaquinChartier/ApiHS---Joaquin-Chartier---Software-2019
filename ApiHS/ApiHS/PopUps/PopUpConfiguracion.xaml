@@ -3,8 +3,16 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ApiHS.Converters"
              x:Class="ApiHS.PopUpConfiguracion"
              CloseWhenBackgroundIsClicked="False">
+
+    <popup:PopupPage.Resources>
+        <ResourceDictionary>
+            <converters:SelectorClaseConverter x:Key="SelectorClase" />
+            <converters:EntryNombreConverter x:Key="EntryNombre" />
+        </ResourceDictionary>
+    </popup:PopupPage.Resources>
 
     <StackLayout VerticalOptions="Center" 
                  HorizontalOptions="Center"
@@ -37,10 +45,28 @@
                        VerticalOptions="End"
                        x:Name="lblEstandar"/>
         </StackLayout>
+        
         <ImageButton Source="check.png" 
                      HorizontalOptions="Center"
                      Margin="8"
-                     Padding="8"/>
+                     Padding="8"
+                     x:Name="Confirmar"
+                     Clicked="ConfirmarCliqueado"
+                     IsEnabled="False">
+
+            <ImageButton.Triggers>
+                <MultiTrigger  TargetType ="ImageButton">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition Binding   ="{Binding Source={x:Reference SelectorClase}, Path=SelectedItem,Converter={StaticResource SelectorClase}}"
+                                          Value     ="True" />
+                        <BindingCondition Binding   ="{Binding Source={x:Reference EntryNombre}, Path=Text.Length,Converter={StaticResource EntryNombre}}" 
+                                          Value     ="True" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="IsEnabled" 
+                            Value="True" />
+                </MultiTrigger>
+            </ImageButton.Triggers>
+        </ImageButton>
 
     </StackLayout>
 

@@ -3,7 +3,8 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"    
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ApiHS.PopUpExportar">
+             x:Class="ApiHS.PopUpExportar"
+             Title="Exportar">
 
     <StackLayout VerticalOptions="Center" 
                  HorizontalOptions="Center"
@@ -12,7 +13,12 @@
                  Padding="50"
                  BackgroundColor="White"
                  >
-      
+            <Frame>
+                <Image x:Name="LoadingGif"
+                       Source="loading_gif.gif"
+                       HorizontalOptions="Center"
+                       IsVisible="False"/>
+            </Frame>
             <Label Text="Cargando"
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand" />
@@ -23,7 +29,8 @@
             <ImageButton IsVisible="False" 
                          x:Name="Copiar" 
                          Clicked="CopiarCliqueado" 
-                         Source="copy.png"/>
+                         Source="share.png"
+                         />
     </StackLayout>
     
 </popup:PopupPage>

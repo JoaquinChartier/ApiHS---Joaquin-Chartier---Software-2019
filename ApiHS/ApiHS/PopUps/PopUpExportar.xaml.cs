@@ -25,18 +25,16 @@ namespace ApiHS
 
         private void CreacionMazo()
         {
-            //Inicializa el diccionario
-            MazoPorCrear.Cartas = new Dictionary<int, int>();
             //Lee el archivo de texto en el celular y lo deserealiza
             string mazoLeido = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "saveDataHS.txt"));
             MazoPorCrear = JsonConvert.DeserializeObject<MazoModelo>(mazoLeido);
 
             var deck = new Deck //Guarda en una variable, un nuevo objeto del tipo DECK
             {
-                HeroDbfId = (int)HeroesEnum.Guldan, //Id del Héroe
+                HeroDbfId = (int)MazoPorCrear.Clase, //Id del Héroe
                 CardDbfIds = MazoPorCrear.Cartas, //Diccionario con las cartas
-                Format = FormatType.FT_WILD, //Formato del mazo: FT_WILD o FT_STANDARD
-                Name = "Mi Mazo personalizado", //Nombre del mazo, opcional
+                Format = MazoPorCrear.TipoMazo, //Formato del mazo: FT_WILD o FT_STANDARD
+                Name = MazoPorCrear.NombreMazo, //Nombre del mazo, opcional
             };
 
             //Serializa el objeto DECK y lo guarda en la variable
@@ -49,13 +47,14 @@ namespace ApiHS
             //Asigna el codigo del mazo al entry
             Codigo.Text = deckstring;
             Copiar.IsVisible = true;
+            LoadingGif.IsVisible = true;
         }
 
         private async void CopiarCliqueado(object sender, EventArgs e)
         {
             await Share.RequestAsync(new ShareTextRequest
             {
-                Text = "Mira mi nuevo mazo de HearthStone: \n" + deckstring,
+                Text = "Mira mi nuevo mazo: "+MazoPorCrear.NombreMazo+" \n"+ "\n" + deckstring,
                 Title = "Mira mi nuevo mazo de HearthStone: "
             });
         }

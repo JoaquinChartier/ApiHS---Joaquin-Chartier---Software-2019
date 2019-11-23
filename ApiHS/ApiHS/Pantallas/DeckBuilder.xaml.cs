@@ -18,6 +18,7 @@ namespace ApiHS
         public string Buscar;
         public string Region = Application.Current.Properties["region"] as string;
         public string Coleccionable = "1";
+        public string Set = Application.Current.Properties["formato"] as string;
         public string UrlJSON = "";
         private readonly HttpClient cliente = new HttpClient();
         public readonly string DevUser = "36e9d604cdd54ecd96a87ae552ba88b9";
@@ -45,18 +46,21 @@ namespace ApiHS
             Token = response.Data.access_token; //asigno el token a la variable token
         }
 
-        public async void AlCliquearOK(object sender, EventArgs e)
+        public async void AlCliquearOK(object sender, EventArgs e)//
         {
+            Set = Application.Current.Properties["formato"] as string;
             Buscar = BarraBusqueda.Text;
-            UrlJSON = "https://us.api.blizzard.com/hearthstone/cards?locale=" + Region + "&collectible="+ Coleccionable + "&textFilter=" + Buscar + "&access_token=" + Token;
+            UrlJSON = "https://us.api.blizzard.com/hearthstone/cards?locale=" + Region + "&set="+Set+"&collectible="+ Coleccionable + "&textFilter=" + Buscar + "&access_token=" + Token;
             string contenido = await cliente.GetStringAsync(UrlJSON); //le paso la url del JSON
             Root resultado = JsonConvert.DeserializeObject<Root>(contenido); //deserializo el JSON en un objeto del tipo "Root"
             ResultList = new ObservableCollection<Card>(resultado.cards); //guardo los resultados que necesito en una coleccion
             ListaResultados.ItemsSource = ResultList; //asigno los resultados al list view
+            
         }
 
         private void ItemSeleccionado(object sender, SelectedItemChangedEventArgs e)
         {
+            
             IndexSeleccionado = e.SelectedItemIndex; //Guardo en variable el index del elemento seleccionado
             VisorCartas.Source = ResultList[IndexSeleccionado].image; //Asigno al visor la imagen correspondiente al index
 
@@ -178,8 +182,12 @@ namespace ApiHS
 
         private void ExportarCliqueado(object sender, EventArgs e)
         {
-            //Guarda en un txt el diccionario en Cuestion
-            string mazoAGuardar = JsonConvert.SerializeObject(MazoPorAgregar);
+            //Leer el archivo de guardado
+            string mazoEnCuestion = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "saveDataHS.txt"));
+            var MazoEnCuestion = JsonConvert.DeserializeObject<MazoModelo>(mazoEnCuestion);
+            //Guarda en el txt el diccionario en Cuestion
+            MazoEnCuestion.Cartas = MazoPorAgregar.Cartas;
+            string mazoAGuardar = JsonConvert.SerializeObject(MazoEnCuestion);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "saveDataHS.txt"), mazoAGuardar);
             //Llama a la nueva pantalla de exportar
             Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopUpExportar());
@@ -193,9 +201,6 @@ namespace ApiHS
         private void IniciacionDePantalla()//
         {
             MazoPorAgregar.Cartas = new Dictionary<int, int>(); //Inicializo el diccionario
-            MazoPorAgregar.NombreMazo = "";
-            MazoPorAgregar.TipoMazo = HearthDb.Enums.FormatType.FT_STANDARD;
-            MazoPorAgregar.Clase = HeroesEnum.Garrosh;
             Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new PopUpConfiguracion());//Llamo al PopUp
         }
     }

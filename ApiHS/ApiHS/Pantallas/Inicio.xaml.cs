@@ -42,6 +42,8 @@ namespace ApiHS
             }
 
             Application.Current.Properties["region"] = RegionSeleccionada;
+            Application.Current.Properties["formato"] = "standard";
+            Navigation.PushModalAsync(new MainPage());
         }
     }
 }
