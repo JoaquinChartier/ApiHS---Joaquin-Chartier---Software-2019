@@ -17,9 +17,10 @@ namespace ApiHS
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
+        protected override bool OnBackButtonPressed()
+        {//Al presionar el Botón fisico del celular, cierra la App
             Application.Current.Quit();
+            return false; // if you return true here, the app won't close
         }
     }
 }

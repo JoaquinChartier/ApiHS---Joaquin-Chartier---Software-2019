@@ -3,12 +3,56 @@
              xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ApiHS.PopUps.PopUpFiltro">
-    
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    
+             x:Class="ApiHS.PopUps.PopUpFiltro"
+             ><!--CloseWhenBackgroundIsClicked="False"-->
+
+    <StackLayout VerticalOptions="CenterAndExpand" 
+                 HorizontalOptions="CenterAndExpand"
+                 Margin="30"
+                 Padding="30"
+                 BackgroundColor="White"
+                 >
+
+        <Slider x:Name="SldMana" 
+                    Minimum="0" 
+                    Maximum="10" 
+                    ThumbColor="Black" 
+                    MinimumTrackColor="Black"
+                    MaximumTrackColor="Black"/>
+
+        <Slider x:Name="SldAtaque" 
+                    Minimum="0" 
+                    Maximum="10"
+                    ThumbColor="Black" 
+                    MinimumTrackColor="Black"
+                    MaximumTrackColor="Black"/>
+
+        <Slider x:Name="SldSalud" 
+                    Minimum="0" 
+                    Maximum="10"
+                    ThumbColor="Black" 
+                    MinimumTrackColor="Black"
+                    MaximumTrackColor="Black"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Picker x:Name="SelectorMecanica" Title="Elegir mecánica: " Grid.Row="0" HorizontalOptions="Start"/>
+            <Picker x:Name="SelectorTipo" Title="Elegir tipo: " Grid.Row="0" HorizontalOptions="End"/>
+            <Picker x:Name="SelectorRareza" Title="Elegir rareza: " Grid.Row="1" HorizontalOptions="Center"/>
+            <Picker x:Name="SelectorTipoEsbirro" Title="Elegir tipo de esbirro: " Grid.Row="2" HorizontalOptions="Center"/>
+        </Grid>
+
+        <ImageButton Source="check.png" 
+                     HorizontalOptions="Center"
+                     Margin="8"
+                     Padding="8"
+                     x:Name="Confirmar"
+                     Clicked="ConfirmarCliqueado"/>
+
+    </StackLayout>
 </popup:PopupPage>

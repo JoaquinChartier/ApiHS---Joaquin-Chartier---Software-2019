@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ApiHS
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Inicio : ContentPage
 	{
         public ObservableCollection<string> Regiones;
         public string RegionSeleccionada;
-
-
+        
         public Inicio ()
 		{
 			InitializeComponent();

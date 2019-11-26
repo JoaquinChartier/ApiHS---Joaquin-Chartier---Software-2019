@@ -10,7 +10,7 @@ namespace ApiHS.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null) 
+            if (value != null) //Si se eligió un heroe en el selector, es true
                 return true;           
             else
                 return false;

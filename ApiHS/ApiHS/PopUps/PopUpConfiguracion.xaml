@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:ApiHS.Converters"
              x:Class="ApiHS.PopUpConfiguracion"
-             CloseWhenBackgroundIsClicked="False">
+             CloseWhenBackgroundIsClicked="false"><!--{Binding CloseWhenBackgroundPropiedad}-->
 
     <popup:PopupPage.Resources>
         <ResourceDictionary>
@@ -67,6 +67,11 @@
                 </MultiTrigger>
             </ImageButton.Triggers>
         </ImageButton>
+
+        <Label Text="(Esta acción borrara las cartas agregadas)"
+               FontAttributes="Italic"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"/>
 
     </StackLayout>
 

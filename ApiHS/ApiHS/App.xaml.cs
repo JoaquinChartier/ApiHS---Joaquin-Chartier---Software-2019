@@ -17,8 +17,8 @@ namespace ApiHS
                 if (Application.Current.Properties.ContainsKey("region"))//Chequeo si el usuario ya eligio su region previamente
                 {
                     //Si contiene la key, pasa a la sig pagina.
-                    MainPage = new NavigationPage(new MainPage());
-                    //MainPage = new Wiki();
+                    MainPage = new MainPage();
+                    //MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
@@ -27,7 +27,7 @@ namespace ApiHS
                 }
             }
             else
-            {
+            {//Si no tiene conexion redirije a esta pantalla
                 MainPage = new SinConexion();
             }
            

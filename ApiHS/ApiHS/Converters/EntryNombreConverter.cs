@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace ApiHS.Converters
@@ -10,7 +8,7 @@ namespace ApiHS.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((int)value > 0)
+            if ((int)value > 0) //Si se ingreso texto en el entry, es true
                 return true;
             else
                 return false;

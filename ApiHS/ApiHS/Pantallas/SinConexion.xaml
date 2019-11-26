@@ -9,13 +9,15 @@
             <Image Source="wifi_off.png" 
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand"/>
-            <Label Text="No hay conexión a Internet, por favor intente mas tarde"
+            <Label Text="No hay conexión a Internet, por favor intente más tarde"
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand" 
                    FontSize="Title"
                    TextColor="Black"
+                   FontAttributes="Bold"
                    HorizontalTextAlignment="Center"/>
-            <Button Text="OK" Clicked="Button_Clicked"/>
+            <Label Text="Presione el botón atrás para SALIR"
+                   HorizontalOptions="CenterAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

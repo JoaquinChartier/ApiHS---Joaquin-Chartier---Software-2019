@@ -13,7 +13,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid Padding="0" Margin="0">
+        <Grid Padding="0" Margin="0" x:Name="GridMayor">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -31,7 +31,11 @@
                        Grid.Row="0" 
                        Grid.Column="0" 
                        Grid.ColumnSpan="3"
-                       SearchButtonPressed="AlCliquearOK"/>
+                       SearchButtonPressed="AlCliquearOK"
+                       CancelButtonColor="White"
+                       TextColor="White"
+                       PlaceholderColor="White"
+                       />
             
             <Button Clicked="AlCliquearOK" 
                     Text="OK" 
@@ -48,10 +52,12 @@
                          VerticalOptions="FillAndExpand" 
                          HorizontalOptions="FillAndExpand" >
 
-                <ListView x:Name="ListaResultados" ItemSelected="ItemSeleccionado">
+                <ListView x:Name="ListaResultados" 
+                          ItemSelected="ItemSeleccionado"
+                          SeparatorColor="White">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell TextColor="Black" 
+                            <TextCell TextColor="White" 
                                       Text="{Binding name}" 
                                       Detail="{Binding rarityId}"
                                       DetailColor="{Binding rarityId,Converter={StaticResource RarezaConverter}}"
@@ -69,7 +75,8 @@
                 <ImageButton Source="tune.png" 
                              BackgroundColor="Default" 
                              Aspect="AspectFit"
-                             Padding="7"/>
+                             Padding="7"
+                             Clicked="FiltroCliqueado"/>
                 
                 <ImageButton x:Name="Configuracion"
                              Source="build.png" 
@@ -88,12 +95,14 @@
                 <Label x:Name="LabelContador" 
                        Text="-" 
                        HorizontalOptions="CenterAndExpand"
-                       FontAttributes="Bold"/>
+                       FontAttributes="Bold"
+                       TextColor="White"/>
                 
                 <Label x:Name="TotalCartasMazo" 
                        Text="0/30" 
                        HorizontalOptions="CenterAndExpand"
-                       FontAttributes="Bold"/>
+                       FontAttributes="Bold"
+                       TextColor="White"/>
 
                 <ImageButton 
                              x:Name="Borrar"
@@ -109,7 +118,7 @@
                              Source="launch.png" 
                              BackgroundColor="Default" 
                              Aspect="AspectFit" 
-                             IsVisible="True"
+                             IsVisible="False"
                              Clicked="ExportarCliqueado"
                              Padding="7"/>
 

@@ -47,14 +47,14 @@ namespace ApiHS
             //Asigna el codigo del mazo al entry
             Codigo.Text = deckstring;
             Copiar.IsVisible = true;
-            LoadingGif.IsVisible = true;
+            LoadingGif.IsVisible = false;
         }
 
         private async void CopiarCliqueado(object sender, EventArgs e)
-        {
+        {//Permite compartir el deckstring en redes sociales o copiarlo al portapapeles
             await Share.RequestAsync(new ShareTextRequest
             {
-                Text = "Mira mi nuevo mazo: "+MazoPorCrear.NombreMazo+" \n"+ "\n" + deckstring,
+                Text = "#Mira mi nuevo mazo: "+MazoPorCrear.NombreMazo+" \n"+ "\n" + deckstring,
                 Title = "Mira mi nuevo mazo de HearthStone: "
             });
         }
