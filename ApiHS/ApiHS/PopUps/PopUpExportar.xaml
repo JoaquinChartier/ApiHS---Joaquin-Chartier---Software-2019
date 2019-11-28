@@ -12,18 +12,21 @@
                  Padding="50"
                  BackgroundColor="White"
                  >
-            <Frame>
+            <Frame HasShadow="False"
+                   BorderColor="Transparent">
                 <Image x:Name="LoadingGif"
-                       Source="loading_gif.gif"
-                       HorizontalOptions="Center"
-                       IsVisible="False"/>
+                       Source="load.png"
+                       HorizontalOptions="Center"/>
             </Frame>
             <Label Text="Cargando"
                    VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand" />
+                   HorizontalOptions="CenterAndExpand" 
+                   x:Name="Cargando"
+                   HorizontalTextAlignment="Center"/>
         
             <Entry Placeholder="Espere por favor"
-                   x:Name="Codigo"/>
+                   x:Name="Codigo"
+                   HorizontalTextAlignment="Center"/>
         
             <ImageButton IsVisible="False" 
                          x:Name="Copiar" 

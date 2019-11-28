@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ApiHS"
              xmlns:converters="clr-namespace:ApiHS.Converters"
              x:Class="ApiHS.DeckBuilder"
              Title="Creador de mazos">
@@ -44,6 +43,7 @@
                     Scale="1" 
                     VerticalOptions="Center" 
                     HorizontalOptions="Center"
+                    
                     />
             
             <StackLayout Grid.Row="1" 
@@ -54,14 +54,27 @@
 
                 <ListView x:Name="ListaResultados" 
                           ItemSelected="ItemSeleccionado"
-                          SeparatorColor="White">
+                          SeparatorColor="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell TextColor="White" 
+                            <!--<TextCell TextColor="White" 
                                       Text="{Binding name}" 
                                       Detail="{Binding rarityId}"
                                       DetailColor="{Binding rarityId,Converter={StaticResource RarezaConverter}}"
-                                      />
+                                      />-->
+                            <ViewCell>
+                                <Frame BackgroundColor="{Binding rarityId,Converter={StaticResource RarezaConverter}}"
+                                       CornerRadius="8"
+                                       BorderColor="Black">
+                                    <StackLayout>
+                                        <Label TextColor="Black"
+                                               Text="{Binding name}"
+                                               FontAttributes="Italic"
+                                               FontSize="Caption"
+                                               />
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -90,7 +103,8 @@
                              Aspect="AspectFit" 
                              x:Name="Agregar" 
                              Clicked="AgregarCliqueado"
-                             Padding="7"/>
+                             Padding="7"
+                             IsEnabled="False"/>
                 
                 <Label x:Name="LabelContador" 
                        Text="-" 

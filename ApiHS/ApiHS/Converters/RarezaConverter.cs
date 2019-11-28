@@ -14,23 +14,27 @@ namespace ApiHS.Converters
             Color resultado;
 
             if (valor == 5)
-            { resultado = Color.Orange;
+            {
+                resultado = Color.FromHex("#e68a00");
                 return resultado;
             }
             else if (valor == 4)
-            { resultado = Color.Violet;
+            { resultado = Color.FromHex("#602772");
                 return resultado;
             }
             else if (valor == 3)
-            { resultado = Color.Blue;
+            {
+                resultado = Color.FromHex("#004de6");
                 return resultado;
             }
             else if (valor == 2)
-            { resultado = Color.White;
+            {
+                resultado = Color.FromHex("#a6a6a6");
                 return resultado;
             }
             else /*(valor==1)*/
-            { resultado = Color.Gray;
+            {
+                resultado = Color.FromHex("#cccccc"); 
                 return resultado;
             }
         }

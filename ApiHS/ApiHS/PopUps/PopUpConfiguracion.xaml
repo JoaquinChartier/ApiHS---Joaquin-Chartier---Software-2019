@@ -5,12 +5,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:ApiHS.Converters"
              x:Class="ApiHS.PopUpConfiguracion"
+             xmlns:effects="clr-namespace:ApiHS.Effects;assembly=ApiHS"
              CloseWhenBackgroundIsClicked="false"><!--{Binding CloseWhenBackgroundPropiedad}-->
 
     <popup:PopupPage.Resources>
         <ResourceDictionary>
             <converters:SelectorClaseConverter x:Key="SelectorClase" />
             <converters:EntryNombreConverter x:Key="EntryNombre" />
+            <x:Int32 x:Key="SmallCornerRadius">4</x:Int32>
+            <x:Int32 x:Key="MediumCornerRadius">8</x:Int32>
+            <x:Int32 x:Key="LargeCornerRadius">16</x:Int32>
         </ResourceDictionary>
     </popup:PopupPage.Resources>
 
@@ -18,7 +22,8 @@
                  HorizontalOptions="Center"
                  Margin="50"
                  Padding="50"
-                 BackgroundColor="White">
+                 BackgroundColor="White"
+                 effects:RoundCornersEffect.CornerRadius="{StaticResource LargeCornerRadius}">
 
             <StackLayout>
                 <Picker Title="Elegir héroe: " 

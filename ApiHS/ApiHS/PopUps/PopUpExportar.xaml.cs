@@ -20,6 +20,7 @@ namespace ApiHS
         public PopUpExportar()
         {
             InitializeComponent();
+            AnimacionCargando();
             ProcesoMayor();
         }
 
@@ -48,15 +49,23 @@ namespace ApiHS
             Codigo.Text = deckstring;
             Copiar.IsVisible = true;
             LoadingGif.IsVisible = false;
+            Cargando.Text = MazoPorCrear.NombreMazo; 
         }
 
         private async void CopiarCliqueado(object sender, EventArgs e)
         {//Permite compartir el deckstring en redes sociales o copiarlo al portapapeles
             await Share.RequestAsync(new ShareTextRequest
             {
-                Text = "#Mira mi nuevo mazo: "+MazoPorCrear.NombreMazo+" \n"+ "\n" + deckstring,
+                Text = "#Mira mi nuevo mazo: "+MazoPorCrear.NombreMazo+" \n"+"#"+ "\n" + deckstring,
                 Title = "Mira mi nuevo mazo de HearthStone: "
             });
+        }
+
+        private async Task AnimacionCargando() {
+            while (LoadingGif.IsVisible==true)
+            {
+                await LoadingGif.RotateTo(7200, 300000);
+            }
         }
     }
 }

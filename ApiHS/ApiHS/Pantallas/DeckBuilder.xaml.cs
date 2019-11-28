@@ -10,6 +10,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.IO;
 using ApiHS.PopUps;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ApiHS
 {
@@ -23,6 +25,7 @@ namespace ApiHS
         public static string Rareza = "";///&rarity=
         public static string TipoEsbirro = "";///&minionType=
         public static string Mecanica = "";///&keyword=
+        public string TamañoBusqueda = "10";
         public string Coleccionable = "1";
         public string Clase = "";
         public string UrlJSON = "";
@@ -52,29 +55,9 @@ namespace ApiHS
             Token = response.Data.access_token; //asigno el token a la variable token
         }
 
-        public async void AlCliquearOK(object sender, EventArgs e)//
+        public void AlCliquearOK(object sender, EventArgs e)//
         {
-            AsignadorClase();
-            Set = Application.Current.Properties["formato"] as string; //Asigno el formato del mazo (wild o standard) a set
-            Buscar = BarraBusqueda.Text;
-            UrlJSON = 
-                "https://us.api.blizzard.com/hearthstone/cards?"+
-                "locale="+Region+
-                "&set="+Set+
-                "&type="+TipoCarta+
-                "&rarity="+Rareza+
-                "&minionType="+TipoEsbirro+
-                "&keyword="+Mecanica+
-                "&class="+Clase+
-                "&collectible="+Coleccionable+
-                "&textFilter="+Buscar+
-                "&access_token="+Token;
-
-            string contenido = await cliente.GetStringAsync(UrlJSON); //le paso la url del JSON
-            Root resultado = JsonConvert.DeserializeObject<Root>(contenido); //deserializo el JSON en un objeto del tipo "Root"
-            ResultList = new ObservableCollection<Card>(resultado.cards); //guardo los resultados que necesito en una coleccion
-            ListaResultados.ItemsSource = ResultList; //asigno los resultados al list view
-            SetterCantidadCartasAgregadas();
+            RequestApi();
         }
 
         private void ItemSeleccionado(object sender, SelectedItemChangedEventArgs e)
@@ -88,20 +71,20 @@ namespace ApiHS
             if (fueAgregada)//Chequea si la carta ya fue agregada
             {
                 Borrar.IsVisible = true; //Muestra el botón borrar
-                SetterLabelContador(); 
+                SetterLabelContador();
             }
             else
-            {   
+            {
                 Borrar.IsVisible = false;
-                if (CantidadCartasMazo < 30) {Agregar.SetValue(IsEnabledProperty, true);}//Si la cantidad de cartas es menor a 30, se puede seguir agregando
+                if (CantidadCartasMazo < 30) { Agregar.SetValue(IsEnabledProperty, true); }//Si la cantidad de cartas es menor a 30, se puede seguir agregando
                 SetterLabelContador();
             }
         }
-        
+
         private void SetterCantidadCartasAgregadas()
         {//Este metodo controla que la cantidad de cartas del mazo no pase de 30
             CantidadCartasMazo = MazoPorAgregar.Cartas.Values.Sum(); //Suma todos los values presentes en el diccionario
-            TotalCartasMazo.Text = CantidadCartasMazo+"/30"; //Asigna el valor al label
+            TotalCartasMazo.Text = CantidadCartasMazo + "/30"; //Asigna el valor al label
             if (CantidadCartasMazo == 30)
             {
                 Agregar.SetValue(IsEnabledProperty, false);//Si la cantidad llegó a 30, desactiva el botón
@@ -109,10 +92,10 @@ namespace ApiHS
                 Exportar.SetValue(IsVisibleProperty, true);
             }
             else { TotalCartasMazo.TextColor = Color.White;
-                   Exportar.SetValue(IsVisibleProperty, false);
+                Exportar.SetValue(IsVisibleProperty, false);
             }
         }
-        
+
         private void SetterLabelContador()
         {//Este metodo controla que las cartas agregadas por mazo no pasen de: 2 en caso de comunes, 1 en caso de legend.
             var esLegendaria = ResultList[IndexSeleccionado].rarityId == 5;
@@ -125,12 +108,22 @@ namespace ApiHS
                 else {
                     LabelContador.Text = valueActual + "/2";
                     if (valueActual == "1") { Agregar.SetValue(IsEnabledProperty, true); }
-                     }
+                }
             }
             else
             {
-                if (esLegendaria) { LabelContador.Text = "0/1"; }
-                else { LabelContador.Text = "0/2"; }
+                if (esLegendaria)
+                {
+                    LabelContador.Text = "0/1";
+                    Agregar.SetValue(IsEnabledProperty, true);
+                    SetterCantidadCartasAgregadas();
+                }//
+                else
+                {
+                    LabelContador.Text = "0/2";
+                    Agregar.SetValue(IsEnabledProperty, true);
+                    SetterCantidadCartasAgregadas();
+                }//
             }
         }
 
@@ -251,6 +244,31 @@ namespace ApiHS
                     Borrar.IsVisible = true;
                 }
             }
+            SetterCantidadCartasAgregadas();
+        }
+
+        private async void RequestApi() {
+            AsignadorClase();
+            Set = Application.Current.Properties["formato"] as string; //Asigno el formato del mazo (wild o standard) a set
+            Buscar = BarraBusqueda.Text;
+            UrlJSON =
+                "https://us.api.blizzard.com/hearthstone/cards?" +
+                "locale=" + Region +
+                "&set=" + Set +
+                "&type=" + TipoCarta +
+                "&rarity=" + Rareza +
+                "&minionType=" + TipoEsbirro +
+                "&keyword=" + Mecanica +
+                "&class=" + Clase +
+                "&collectible=" + Coleccionable +
+                "&pageSize=" + TamañoBusqueda +
+                "&textFilter=" + Buscar +
+                "&access_token=" + Token;
+
+            string contenido = await cliente.GetStringAsync(UrlJSON); //le paso la url del JSON
+            Root resultado = JsonConvert.DeserializeObject<Root>(contenido); //deserializo el JSON en un objeto del tipo "Root"
+            ResultList = new ObservableCollection<Card>(resultado.cards); //guardo los resultados que necesito en una coleccion
+            ListaResultados.ItemsSource = ResultList; //asigno los resultados al list view
             SetterCantidadCartasAgregadas();
         }
     }

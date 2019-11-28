@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,7 +26,7 @@ namespace ApiHS
             Selector.ItemsSource = Regiones;
         }
 
-        public void SelectedIndexChanged(object sender, EventArgs e)
+        public async void SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Selector.SelectedIndex == 0)
             {//Si la opcion elegida es la primera setea la region como España
@@ -35,10 +36,10 @@ namespace ApiHS
             {//Si la opcion elegida es la segunda setea la region como Latinoamerica
                 RegionSeleccionada = "es_MX";
             }
-
             Application.Current.Properties["region"] = RegionSeleccionada;
             Application.Current.Properties["formato"] = "standard";
-            Navigation.PushModalAsync(new MainPage());
+
+            await Navigation.PushModalAsync(new MainPage());
         }
     }
 }
